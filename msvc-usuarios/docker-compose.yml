@@ -11,3 +11,15 @@ services:
       MYSQL_USER: Juanem
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
+
+  db-cursos:
+    container_name: msvc_cursos
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: msvc_cursos
+      MYSQL_USER: Juanem
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root

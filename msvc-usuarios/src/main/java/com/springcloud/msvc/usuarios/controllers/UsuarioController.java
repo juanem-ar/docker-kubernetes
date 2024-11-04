@@ -17,14 +17,14 @@ public class UsuarioController {
     private IUsuarioService iUsuarioService;
 
     @GetMapping
-    public List<Usuario> listar(){
-        return iUsuarioService.listar();
+    public ResponseEntity<List<Usuario>> listar(){
+        return ResponseEntity.ok(iUsuarioService.listar());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> detalle(@PathVariable Long id){
         Optional<Usuario> usuarioOpt = iUsuarioService.porId(id);
-        if (usuarioOpt.isEmpty())
+        if (usuarioOpt.isPresent())
             return ResponseEntity.ok(usuarioOpt.get());
         return ResponseEntity.notFound().build();
     }
