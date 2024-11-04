@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db-bookings:
+    container_name: msvc_usuarios
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: msvc_usuarios
+      MYSQL_USER: Juanem
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
