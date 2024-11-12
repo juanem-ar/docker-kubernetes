@@ -3,7 +3,6 @@ package com.springcloud.msvc.usuarios.controllers;
 import com.springcloud.msvc.usuarios.models.entities.Usuario;
 import com.springcloud.msvc.usuarios.services.IUsuarioService;
 import jakarta.validation.Valid;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -98,5 +97,9 @@ public class UsuarioController {
                 errores.put(err.getField(), "El campo " + err.getField() + ":" + err.getDefaultMessage());
             });
             return ResponseEntity.badRequest().body(errores);
+    }
+    @GetMapping("/usuarios-por-curso")
+    public ResponseEntity<?> obtenerAlumnosPorCurso(@RequestParam List<Long> ids){
+        return ResponseEntity.ok(iUsuarioService.listarPorIds(ids));
     }
 }
