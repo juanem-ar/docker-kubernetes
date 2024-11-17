@@ -1,4 +1,4 @@
-FROM openjdk:21
+FROM openjdk:21-jdk-slim as builder
 LABEL authors="jmlopez"
 
 #Carpeta destino dentro de la imagen
@@ -17,6 +17,12 @@ COPY ./msvc-usuarios/src ./src
 
 RUN ./mvnw clean package -DskipTests
 
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+COPY --from=builder /app/msvc-usuarios/target/msvc-usuarios-0.0.1-SNAPSHOT.jar .
+
 EXPOSE 8001
 
-ENTRYPOINT ["java", "-jar", "./target/msvc-usuarios-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "msvc-usuarios-0.0.1-SNAPSHOT.jar"]
