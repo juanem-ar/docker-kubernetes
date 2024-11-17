@@ -1,25 +1,42 @@
 version: '3'
 services:
-  db-usuarios:
-    container_name: msvc_usuarios
+  db-app:
+    container_name: db-app
     image: mysql:latest
     restart: always
     ports:
       - "3306:3306"
+    networks:
+      - docker-kubernetes
     environment:
-      MYSQL_DATABASE: msvc_usuarios
+      MYSQL_DATABASE: msvc_app
       MYSQL_USER: Juanem
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - data-mysql:/var/lib/mysql
 
-  db-cursos:
-    container_name: msvc_cursos
-    image: mysql:latest
+  msvc-cursos:
+    container_name: msvc-cursos
+    image: cursos
     restart: always
     ports:
-      - "3307:3306"
-    environment:
-      MYSQL_DATABASE: msvc_cursos
-      MYSQL_USER: Juanem
-      MYSQL_PASSWORD: root
-      MYSQL_ROOT_PASSWORD: root
+      - "8002:8002"
+    networks:
+      - docker-kubernetes
+
+  msvc-usuarios:
+    container_name: msvc-usuarios
+    image: usuarios
+    restart: always
+    ports:
+      - "8001:8001"
+    networks:
+      - docker-kubernetes
+
+networks:
+  docker-kubernetes:
+    driver: bridge
+
+volumes:
+  data-mysql:
