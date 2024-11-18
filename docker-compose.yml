@@ -22,8 +22,13 @@ services:
     restart: always
     ports:
       - "8002:8002"
+    env_file:
+      - ./msvc-cursos/.env
     networks:
       - docker-kubernetes
+    depends_on:
+      - db-app
+      - msvc-usuarios
 
   msvc-usuarios:
     container_name: msvc-usuarios
@@ -31,8 +36,12 @@ services:
     restart: always
     ports:
       - "8001:8001"
+    env_file:
+      - ./msvc-usuarios/.env
     networks:
       - docker-kubernetes
+    depends_on:
+      - db-app
 
 networks:
   docker-kubernetes:
