@@ -18,10 +18,10 @@ services:
 
   msvc-cursos:
     container_name: msvc-cursos
-    #image: cursos
-    build:
-      context: ./
-      dockerfile: ./msvc-cursos/Dockerfile
+    image: juanemar/cursos
+    #build:
+    #  context: ./
+    #  dockerfile: ./msvc-cursos/Dockerfile
     restart: always
     ports:
       - "8002:8002"
@@ -35,10 +35,10 @@ services:
 
   msvc-usuarios:
     container_name: msvc-usuarios
-    #image: usuarios
-    build:
-      context: ./
-      dockerfile: ./msvc-usuarios/Dockerfile
+    image: juanemar/usuarios
+    #build:
+    #  context: ./
+    #  dockerfile: ./msvc-usuarios/Dockerfile
     restart: always
     ports:
       - "8001:8001"
